@@ -1,16 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { v4 as uuidV4 } from "uuid";
 export const Forms = ({ input, setInput, todos, setTodo, edit, setEdit }) => {
+ 
   const handleChange = (e) => {
     setInput(e.target.value);
   };
-  const updateTodo = (title, id, completed) => {
-    const newtodo = todos.map((item) =>
-      item.id === id ? { title, id, completed } : item
-    );
-    setTodo(newtodo);
-    setEdit("");
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!edit) {
@@ -21,6 +16,22 @@ export const Forms = ({ input, setInput, todos, setTodo, edit, setEdit }) => {
       setInput("");
     }
   };
+
+  const updateTodo = (title, id, completed) => {
+    const newtodo = todos.map((item) =>
+      item.id === id ? { title, id, completed } : item
+    );
+    setTodo(newtodo);
+    setEdit("");
+  };
+  
+  useEffect(() => {
+    if (edit) {
+      setInput(edit.title);
+    } else {
+      setInput("");
+    }
+  }, [setInput, edit]);
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -32,7 +43,7 @@ export const Forms = ({ input, setInput, todos, setTodo, edit, setEdit }) => {
         onChange={handleChange}
       />
       <button className="button-add" type="submit">
-        Add
+        {edit ? "ok" : "Add"}
       </button>
     </form>
   );
