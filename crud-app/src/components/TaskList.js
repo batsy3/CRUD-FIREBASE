@@ -1,6 +1,13 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actioncreators } from "../state/iindex";
 
 export const TaskList = ({ todos, setTodo, edit, setEdit }) => {
+  // const taskListstate = useSelector((state) => state);
+  // const dispatch = useDispatch();
+  // const { addTask, deleteTask } = bindActionCreators(actioncreators, dispatch);
+
   const deleteTask = ({ id }) => {
     setTodo(todos.filter((task) => task.id !== id));
   };

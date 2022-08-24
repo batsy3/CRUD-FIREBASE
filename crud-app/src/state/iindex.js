@@ -1,0 +1,1 @@
+export * as actioncreators from './action_creators/imdex';
